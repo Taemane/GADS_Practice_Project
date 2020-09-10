@@ -103,11 +103,9 @@ public class ProjectSubmissionActivity extends AppCompatActivity implements Subm
             submitRequest.enqueue(new Callback<MyDetailsToSubmit>() {
                 @Override
                 public void onResponse(Call<MyDetailsToSubmit> call, Response<MyDetailsToSubmit> response) {
-                    if (response.isSuccessful()){
-                        Log.d(TAG, "onResponse: Server response" + response.toString());
-                        showSuccessDialog();
-                        Toast.makeText(getApplicationContext(), "Project Submission is Successful", Toast.LENGTH_SHORT).show();
-                    }
+                    Log.d(TAG, "onResponse: Server response" + response.toString());
+                    showSuccessDialog();
+                    Toast.makeText(getApplicationContext(), "Project Submission is Successful", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
