@@ -5,6 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceBuilder {
     private static final String URL = "https://gadsapi.herokuapp.com/";
+
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(URL)
             .addConverterFactory(GsonConverterFactory.create());

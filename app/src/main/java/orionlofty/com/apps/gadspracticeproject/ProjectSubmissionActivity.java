@@ -93,24 +93,28 @@ public class ProjectSubmissionActivity extends AppCompatActivity implements Subm
     public void onYesClicked(String status) {
         if (status.equals("ok")){
             SubmitService submitService = SubmitServiceBuilder.buildService(SubmitService.class);
-            Call<MyDetailsToSubmit> submitRequest = submitService.submitDetails(
+            Call<Void> submitRequest = submitService.submitDetails(
                     firstName.getText().toString().trim(),
                     lastName.getText().toString().trim(),
                     emailAddress.getText().toString().trim(),
                     githubLink.getText().toString().trim()
             );
 
-            submitRequest.enqueue(new Callback<MyDetailsToSubmit>() {
+            submitRequest.enqueue(new Callback<Void>() {
                 @Override
-                public void onResponse(Call<MyDetailsToSubmit> call, Response<MyDetailsToSubmit> response) {
-                    Log.d(TAG, "onResponse: Server response" + response.toString());
-                    showSuccessDialog();
-                    Toast.makeText(getApplicationContext(), "Project Submission is Successful", Toast.LENGTH_SHORT).show();
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()){
+                        Log.d(TAG, "onResponse: Server response" + response.toString());
+                        showSuccessDialog();
+                        Toast.makeText(getApplicationContext(), "Project Submission is Successful", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Project Submission is Successful", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 @Override
-                public void onFailure(Call<MyDetailsToSubmit> call, Throwable t) {
-                    Log.d(TAG, "onFailure: Unable to submit details");
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Log.d(TAG, "onFailure: Unable to submit details" + " " + t.toString());
                     Toast.makeText(getApplicationContext(), "Unable to submit details", Toast.LENGTH_SHORT).show();
                     showErrorDialog();
                 }
