@@ -49,6 +49,7 @@ public class SubmitDialogFragment extends DialogFragment {
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Yes clicked");
                 buttonResponseListener.onYesClicked(ON_CLICK_RESULT);
+                getDialog().dismiss();
             }
         });
         return view;
